@@ -6,6 +6,10 @@ function subtract(a: number, b: number): number {
 	return a - b;
 }
 
+function test(name: string) {
+	return name;
+}
+
 const t = add(1, 2);
 const u = subtract(1, 2);
 

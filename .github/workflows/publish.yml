@@ -1,4 +1,4 @@
-name: Publish
+name: Release
 
 on:
   push:
@@ -8,7 +8,8 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  build:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -20,12 +21,9 @@ jobs:
           node-version: 16
 
       - name: Install Dependencies
-        run: npm install
+        run: yarn
 
-      - name: Create Release Pull Request or Publish
-        id: changesets
+      - name: Create Release Pull Request
         uses: changesets/action@v1
-        with:
-          publish: pnpm run build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
